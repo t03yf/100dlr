@@ -26,23 +26,27 @@
     .testimonial-card::before { content:"“"; color:#ff4500; font-size:3rem; position:absolute; top:10px; left:20px; }
     .testimonial-author { margin-top:10px; font-weight:bold; text-align:right; color:#ff4500; font-style:normal; }
     footer { text-align:center; padding:40px 20px; font-size:.9rem; color:#777; border-top:1px solid #333; }
+
+    /* ✨ Animations */
+    .fade-in { opacity:0; transform: translateY(50px); transition: all 0.8s ease; }
+    .fade-in.show { opacity:1; transform: translateY(0); }
   </style>
 </head>
 <body>
 
-<header>
+<header class="fade-in">
   <h1>🚀 Take Control of Your Life Today</h1>
   <p>One powerful planner to organize your days, weeks, meals, money & habits.</p>
   <a href="https://payeer.com/checkout-placeholder" class="cta-button">Get Instant Access – $4.99</a>
 </header>
 
-<section>
+<section class="fade-in">
   <h2>🎯 The Struggle</h2>
   <p>Overwhelmed by tasks? Forgetting deadlines? Struggling with habits, meals, or money?  
      You’re not alone — and the chaos stops here.</p>
 </section>
 
-<section>
+<section class="fade-in">
   <h2>💡 The Life Planner Bundle</h2>
   <div class="features">
     <div class="feature-card"><h3>Daily Planner</h3><p>Plan your top priorities and schedule every hour.</p></div>
@@ -55,7 +59,7 @@
   </div>
 </section>
 
-<section>
+<section class="fade-in">
   <h2>🗣️ Real Stories</h2>
   <div class="testimonials">
     <div class="testimonial-card">
@@ -73,7 +77,7 @@
   </div>
 </section>
 
-<section style="text-align:center;">
+<section class="fade-in" style="text-align:center;">
   <h2>🎁 Limited-Time Launch Offer</h2>
   <p>⚡ Regular Price: <s>$9.99</s></p>
   <p>✅ Today Only: <strong>$4.99</strong></p>
@@ -84,6 +88,20 @@
 <footer>
   © 2025 Life Planner Bundle | All Rights Reserved
 </footer>
+
+<script>
+  // ✨ Fade-in on scroll
+  const faders = document.querySelectorAll('.fade-in');
+  const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+  const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting) return;
+      entry.target.classList.add('show');
+      observer.unobserve(entry.target);
+    });
+  }, appearOptions);
+  faders.forEach(fader => { appearOnScroll.observe(fader); });
+</script>
 
 </body>
 </html>
